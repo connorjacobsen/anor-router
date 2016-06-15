@@ -1,0 +1,61 @@
+AllCops:
+  # Display name of failing cops
+  DisplayCopNames: true
+
+# Massive parameter lists are evil
+ParameterLists:
+  Max: 3
+  CountKeywordArgs: true
+
+# Prefer braces when chaining blocks, like in specs
+BlockDelimiters:
+  EnforcedStyle: braces_for_chaining
+
+BlockNesting:
+  Max: 3
+
+CollectionMethods:
+  Enabled: true
+  PreferredMethods:
+    collect:  'map'
+    inject:   'reduce'
+    find:     'detect'
+    find_all: 'select'
+
+# Extreme line length limit
+LineLength:
+  Max: 80
+
+Documentation:
+  Enabled: false
+
+# Align if/else blocks with the variable assignment
+EndAlignment:
+  AlignWith: variable
+
+# Prefer #kind_of? over #is_a?
+ClassCheck:
+  EnforcedStyle: kind_of?
+
+# Prefer
+#
+#   some_thing
+#     .foo
+#     .bar
+#     .baz
+#
+# Over
+#   
+#   some_thing.foo
+#             .bar
+#             .baz
+MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+# Align hash keys and values in multiline hash
+AlignHash:
+  EnforcedColonStyle: table
+
+# Prefer `public_send` to `send`
+Send:
+  Enabled: true
