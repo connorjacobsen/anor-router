@@ -1,7 +1,7 @@
 require 'anor/router/version'
+require 'anor/router/resolver'
 
 module Anor
   module Router
-    # Your code goes here...
   end
 end
