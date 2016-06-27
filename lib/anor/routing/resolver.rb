@@ -1,5 +1,5 @@
 module Anor
-  module Router
+  module Routing
     # Error signifying the action could not be resolved.
     class NotResolveableError < StandardError; end
 

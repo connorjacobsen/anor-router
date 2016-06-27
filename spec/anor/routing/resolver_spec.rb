@@ -5,7 +5,7 @@ class ExampleAction
   end
 end
 
-describe Anor::Router::Resolver do
+describe Anor::Routing::Resolver do
   describe '#call' do
     let(:resolver) { described_class.new }
 
@@ -52,7 +52,7 @@ describe Anor::Router::Resolver do
       it 'raises proper exception' do
         expect {
           resolver.call(Fixnum)
-        }.to raise_exception(Anor::Router::NotResolveableError)
+        }.to raise_exception(Anor::Routing::NotResolveableError)
       end
     end
   end

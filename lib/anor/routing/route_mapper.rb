@@ -1,5 +1,5 @@
 module Anor
-  module Router
+  module Routing
     module RouteMapper
       VARIABLE_REGEX = '[a-zA-Z0-9_]+'.freeze
 

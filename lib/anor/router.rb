@@ -1,8 +1,12 @@
 require 'anor/router/version'
-require 'anor/router/http_router.rb'
-require 'anor/router/resolver'
+
+require 'anor/routing/http_router.rb'
+require 'anor/routing/resolver'
+require 'anor/routing/route'
 
 module Anor
-  module Router
+  class Router
+    def initialize
+    end
   end
 end

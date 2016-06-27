@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Anor::Router::RouteMapper do
+describe Anor::Routing::RouteMapper do
   def var_path(var)
     "(?<#{var}>#{described_class::VARIABLE_REGEX})"
   end
