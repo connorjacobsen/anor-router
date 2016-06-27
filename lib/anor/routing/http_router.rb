@@ -18,13 +18,35 @@ module Anor
         @routes = Hash.new([])
       end
 
-      def get(url, options = {})
-        route = Route.new(RouteMapper.call(url), options)
-        @routes[:get].push(route)
-      end
-
       def match(action, url)
         @routes[action].detect { |r| r.match?(url) }
+      end
+
+      def get(url, options = {})
+        register(:get, url, options)
+      end
+
+      def post(url, options = {})
+        register(:post, url, options)
+      end
+
+      def patch(url, options = {})
+        register(:patch, url, options)
+      end
+
+      def put(url, options = {})
+        register(:put, url, options)
+      end
+
+      def delete(url, options = {})
+        register(:delete, url, options)
+      end
+
+      private
+
+      def register(verb, url, options = {})
+        route = Route.new(RouteMapper.call(url), options)
+        @routes[verb].push(route)
       end
     end
   end
