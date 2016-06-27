@@ -4,15 +4,13 @@ module Anor
       VARIABLE_REGEX = '[a-zA-Z0-9_]+'.freeze
 
       def self.call(path)
-        %r(^#{transform(path)}$)
+        %r{^#{transform(path)}$}
       end
-
-      private
 
       def self.transform(path)
         chunks = path.split('/').map do |chunk|
           if chunk.start_with?(':')
-            chunk.gsub!(':', '')
+            chunk.delete!(':')
             "(?<#{chunk}>#{VARIABLE_REGEX})"
           else
             chunk

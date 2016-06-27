@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Anor::Routing::Route do
-  let(:regex) { %r(/users/(?<id>[a-zA-Z0-9_]+)) }
+  let(:regex) { %r{/users/(?<id>[a-zA-Z0-9_]+)} }
   let(:endpoint) do
     Class.new do
       def call

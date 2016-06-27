@@ -11,7 +11,7 @@ describe Anor::Routing::RouteMapper do
         route = '/hello'
         regex = described_class.call(route)
 
-        expect(regex).to eq(%r(^/hello$))
+        expect(regex).to eq(%r{^/hello$})
         expect(regex.match(route)).not_to be_nil
       end
     end
@@ -21,7 +21,7 @@ describe Anor::Routing::RouteMapper do
         route = '/users/:id'
         regex = described_class.call(route)
 
-        expect(regex).to eq(%r(^/users/(?<id>[a-zA-Z0-9_]+)$))
+        expect(regex).to eq(%r{^/users/(?<id>[a-zA-Z0-9_]+)$})
         expect(regex.match('/users/12')).not_to be_nil
         expect(regex.match('/users/connor')).not_to be_nil
       end

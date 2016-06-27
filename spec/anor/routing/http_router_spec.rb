@@ -4,9 +4,9 @@ describe Anor::Routing::HttpRouter do
   describe '#initialize' do
     it 'sets configuration options' do
       options = {
-        port: 8000,
-        host: 'localhost',
-        scheme: 'https',
+        port:   8000,
+        host:   'localhost',
+        scheme: 'https'
       }
 
       router = described_class.new(options)
@@ -29,7 +29,7 @@ describe Anor::Routing::HttpRouter do
     it 'adds a GET route' do
       router = described_class.new
 
-      router.get('/users/:id', to: ->(params) { ['200', {}, ['Hello, world']] })
+      router.get('/users/:id', to: ->() { ['200', {}, ['Hello, world']] })
 
       expect(router.routes[:get].size).to eq(1)
       expect(router.routes[:get].first.match?('/users/12'))
@@ -38,7 +38,7 @@ describe Anor::Routing::HttpRouter do
 
   describe '#match' do
     let(:router) { described_class.new }
-    let(:action) { ->(params) { ['200', {}, ['Hello, world']] } }
+    let(:action) { ->() { ['200', {}, ['Hello, world']] } }
 
     it 'correctly matches' do
       router.get('/users/:id', to: action)
