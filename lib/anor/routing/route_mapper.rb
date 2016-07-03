@@ -8,6 +8,8 @@ module Anor
       end
 
       def self.transform(path)
+        return path if path == '/'
+
         chunks = path.split('/').map do |chunk|
           if chunk.start_with?(':')
             chunk.delete!(':')

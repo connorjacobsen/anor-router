@@ -60,5 +60,11 @@ describe Anor::Routing::HttpRouter do
       expect(router.match(:get, '/users/12')).to be_nil
       expect(router.match(:get, '/users/')).to be_nil
     end
+
+    it 'can match /' do
+      router.get('/', to: action)
+
+      expect(router.match(:get, '/')).not_to be_nil
+    end
   end
 end

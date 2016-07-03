@@ -40,6 +40,10 @@ module Anor
       )
     end
 
+    def root(action)
+      @router.get('/', to: action)
+    end
+
     def get(url, options = {})
       @router.get(url, options)
     end

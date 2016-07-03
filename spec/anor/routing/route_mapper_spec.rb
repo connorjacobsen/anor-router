@@ -35,6 +35,12 @@ describe Anor::Routing::RouteMapper do
 
         expect(described_class.transform(path)).to eq('/hello')
       end
+
+      it 'handles / correctly' do
+        path = '/'
+
+        expect(described_class.transform(path)).to eq('/')
+      end
     end
 
     context 'with one variable' do
