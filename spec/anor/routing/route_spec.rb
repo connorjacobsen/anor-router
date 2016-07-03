@@ -43,4 +43,20 @@ describe Anor::Routing::Route do
       expect(route.match?('/foo/bar')).to be(false)
     end
   end
+
+  describe '#params' do
+    it 'sets params after a match' do
+      route = described_class.new(regex, to: endpoint, as: :my_endpoint)
+      route.match?('/users/12')
+
+      expect(route.params).to eq({ id: '12' })
+    end
+
+    it 'has no params without a match' do
+      route = described_class.new(regex, to: endpoint, as: :my_endpoint)
+      route.match?('/humans/12')
+
+      expect(route.params).to be_nil
+    end
+  end
 end

@@ -1,7 +1,8 @@
 require 'rack'
 
 require 'anor/router/version'
-require 'anor/routing/http_router.rb'
+require 'anor/routing/http_router'
+require 'anor/routing/request'
 require 'anor/routing/resolver'
 require 'anor/routing/route'
 
@@ -21,15 +22,14 @@ module Anor
 
     # Rack entry point.
     def call(env)
-      puts env.inspect
+      request = Anor::Routing::Request.new(env)
+      app = match(request.method, request.path)
 
-      http_method = env['REQUEST_METHOD'].downcase.to_sym
-      app = match(http_method, env['REQUEST_URI'])
-
-      unless app.nil?
-        app.to.call(env)
+      if app.nil?
+        NotFound.new.call(request)
       else
-        NotFound.new.call(env)
+        request.params.merge(app.params)
+        app.to.call(request)
       end
     end
 
@@ -66,8 +66,6 @@ module Anor
 
     def namespace(path, &block)
     end
-
-    private
 
     def match(action, url)
       @router.match(action, url)
