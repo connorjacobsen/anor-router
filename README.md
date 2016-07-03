@@ -2,6 +2,8 @@
 
 Simple HTTP router for Ruby applications.
 
+This project is still in the "make it work" phase, so expect it to be both ugly and slow.
+
 ## Installation
 
 Add this line to your application's Gemfile:
