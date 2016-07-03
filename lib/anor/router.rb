@@ -1,11 +1,18 @@
-require 'anor/router/version'
+require 'rack'
 
+require 'anor/router/version'
 require 'anor/routing/http_router.rb'
 require 'anor/routing/resolver'
 require 'anor/routing/route'
 
 module Anor
   class Router
+    class NotFound < StandardError
+      def call(_env)
+        ['404', {}, ['404 Not Found']]
+      end
+    end
+
     def initialize(options = {}, &block)
       @router = Anor::Routing::HttpRouter.new(options)
 
@@ -14,6 +21,23 @@ module Anor
 
     # Rack entry point.
     def call(env)
+      puts env.inspect
+
+      http_method = env['REQUEST_METHOD'].downcase.to_sym
+      app = match(http_method, env['REQUEST_URI'])
+
+      unless app.nil?
+        app.to.call(env)
+      else
+        NotFound.new.call(env)
+      end
+    end
+
+    def run
+      Rack::Server.start(
+        app: self,
+        Port: @router.port
+      )
     end
 
     def get(url, options = {})

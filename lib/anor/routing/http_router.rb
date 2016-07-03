@@ -22,24 +22,10 @@ module Anor
         @routes[action].detect { |r| r.match?(url) }
       end
 
-      def get(url, options = {})
-        register(:get, url, options)
-      end
-
-      def post(url, options = {})
-        register(:post, url, options)
-      end
-
-      def patch(url, options = {})
-        register(:patch, url, options)
-      end
-
-      def put(url, options = {})
-        register(:put, url, options)
-      end
-
-      def delete(url, options = {})
-        register(:delete, url, options)
+      %i(get post patch put delete).each do |method|
+        define_method(method) do |url, options = {}|
+          register(method, url, options)
+        end
       end
 
       private
