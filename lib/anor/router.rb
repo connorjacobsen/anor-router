@@ -64,6 +64,11 @@ module Anor
       @router.delete(url, options)
     end
 
+    def namespace(path, &block)
+    end
+
+    private
+
     def match(action, url)
       @router.match(action, url)
     end
