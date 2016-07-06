@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'anor/router/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'anor_router'
+  spec.name          = 'anor-router'
   spec.version       = Anor::Router::VERSION
   spec.authors       = ['Connor Jacobsen']
   spec.email         = ['jacobsen.connor@gmail.com']

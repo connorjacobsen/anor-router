@@ -1,6 +1,6 @@
 $:.push File.expand_path('../../lib', __FILE__)
 
-require 'anor_router'
+require 'anor-router'
 
 router = Anor::Router.new do
   root ->(_request) { ['200', {}, ['Hello!']] }
