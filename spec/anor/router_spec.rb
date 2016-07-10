@@ -8,9 +8,15 @@ describe Anor::Router do
         get '/users/:id', to: action
 
         post '/users', to: action
+
+        namespace '/foo' do
+          get 'bar', to: action
+        end
       end
 
-      expect(router.match(:get, '/users/42'))
+      expect(router.match(:get, '/users/42')).not_to be_nil
+      expect(router.match(:post, '/users')).not_to be_nil
+      expect(router.match(:get, '/foo/bar')).not_to be_nil
     end
   end
 end

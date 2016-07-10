@@ -2,6 +2,7 @@ require 'rack'
 
 require 'anor/router/version'
 require 'anor/routing/http_router'
+require 'anor/routing/namespace'
 require 'anor/routing/request'
 require 'anor/routing/resolver'
 require 'anor/routing/route'
@@ -17,7 +18,7 @@ module Anor
     def initialize(options = {}, &block)
       @router = Anor::Routing::HttpRouter.new(options)
 
-      instance_eval(&block)
+      instance_eval(&block) if block_given?
     end
 
     # Rack entry point.
@@ -65,6 +66,7 @@ module Anor
     end
 
     def namespace(path, &block)
+      Anor::Routing::Namespace.new(self, path, &block)
     end
 
     def match(action, url)
