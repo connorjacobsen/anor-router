@@ -1,3 +1,5 @@
+require 'rack'
+
 require 'anor/routing/route'
 require 'anor/routing/route_mapper'
 
@@ -26,6 +28,21 @@ module Anor
         define_method(method) do |url, options = {}|
           register(method, url, options)
         end
+      end
+
+      def redirect(url, options = {})
+        status = options.fetch(:status, 302)
+        unless status >= 300 && status < 400
+          raise ArgumentError, 'Status must be 3xx'
+        end
+
+        action = ->(env) do
+          response = ::Rack::Response.new(env)
+          response.redirect(eval(%|"#{url}"|), status)
+          response.finish
+        end
+
+        register(:get, path, options.merge!(to: action))
       end
 
       private

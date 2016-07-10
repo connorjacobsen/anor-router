@@ -69,6 +69,10 @@ module Anor
       Anor::Routing::Namespace.new(self, path, &block)
     end
 
+    def redirect(url, options = {})
+      @router.redirect(url, options = {})
+    end
+
     def match(action, url)
       @router.match(action, url)
     end
